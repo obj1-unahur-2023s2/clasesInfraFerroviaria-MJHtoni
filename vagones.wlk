@@ -2,7 +2,6 @@ class Pasajero {
       const property tieneBanio
       var property estaOrdenado = true
       var cantidadDePasajeros = 0
-      var cantidadMaximaDeCarga = 0
       var pesoMaximo = 0
       const property ancho
       const property largo
@@ -10,7 +9,7 @@ class Pasajero {
       method cantidadDePasajeros() {
             const pasajeros = if(ancho <= 3) {8*largo} else {10*largo}}
             return if (not estaOrdenado) {0.max(pasajeros - 15)} else {pasajeros}
-      method cantidadMaximaDeCarga() {
+      method carga() {
             return if(tieneBanio) {300} else {800}}
       method pesoMaximo() {
             return self.cantidadPasajeros() + self.cantidadMaximaDeCarga() + 2000}
