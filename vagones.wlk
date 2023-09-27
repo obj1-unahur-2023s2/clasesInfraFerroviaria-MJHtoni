@@ -29,6 +29,7 @@ class Carga {
 class Dormitorio {
       const property cantidadCompartimientos
       var property camasPorCompartimiento
+      const tieneBanio = true
 
       method cantidadDePasajeros() {
             return cantidadCompartimientos*camasPorCompartimiento}
