@@ -1,40 +1,48 @@
-class Pasajero {
+class Vagon {
+	
+	method carga() = 0
+	method cantidadDePasajeros() = 0
+	method esDePasajeros() {
+      	return self.cantidadDePasajeros() > 0
+      }
+    method puedeTransportar(unValor) = self.carga() >= unValor
+}
+
+class Pasajero inherits Vagon{
       const property tieneBanio
-      var property estaOrdenado = true
-      var cantidadDePasajeros = 0
-      var pesoMaximo = 0
+      var property estaOrdenado
       const property ancho
       const property largo
 
-      method cantidadDePasajeros() {
-            const pasajeros = if(ancho <= 3) {8*largo} else {10*largo}}
-            return if (not estaOrdenado) {0.max(pasajeros - 15)} else {pasajeros}
-      method carga() {
+      override method cantidadDePasajeros() {
+            const pasajeros = if(ancho <= 3) {8*largo} else {10*largo}
+            return if (not estaOrdenado) {0.max(pasajeros - 15)} else {pasajeros}}
+      override method carga() {
             return if(tieneBanio) {300} else {800}}
       method pesoMaximo() {
-            return self.cantidadPasajeros() + self.cantidadMaximaDeCarga() + 2000}
+            return self.cantidadDePasajeros() + self.carga() + 2000}
       method esPopular() = self.cantidadDePasajeros() > 50
 }
 
-class Carga {
+class Carga inherits Vagon{
       const property cargaMaximaIdeal
       var property maderasSueltas
 
-      method cantidadDePasajeros() = 0
-      method carga() = 0.max(cargaMaximaIdeal - 400*maderasSueltas)
+      override method cantidadDePasajeros() = 0
+      override method carga() = 0.max(cargaMaximaIdeal - 400*maderasSueltas)
       method pesoMaximo() = 1500*cargaMaximaIdeal
       method esPopular() = self.cantidadDePasajeros() > 50
 }
 
-class Dormitorio {
+class Dormitorio inherits Vagon{
       const property cantidadCompartimientos
       var property camasPorCompartimiento
-      const tieneBanio = true
 
-      method cantidadDePasajeros() {
+      override method cantidadDePasajeros() {
             return cantidadCompartimientos*camasPorCompartimiento}
-      method carga() = 1200
+      override method carga() = 1200
       method pesoMaximo() = 4000*self.cantidadDePasajeros() + 1200
-      method esPopular() = self.cantidadDePasajeros() > 50
-      
-    
+      method esPopular() {
+      		return self.cantidadDePasajeros() > 50
+			}
+}
